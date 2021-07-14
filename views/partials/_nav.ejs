@@ -1,0 +1,45 @@
+<header role="banner">
+     
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand absolute" href="/">OIKEN</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse navbar-light" id="navbarsExample05">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <a class="nav-link <%= page_name === 'index' && 'active' %>" href="/">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link <%= page_name === 'courses' && 'active' %> dropdown-toggle" href="courses" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Courses</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown04">
+                <a class="dropdown-item" href="courses">HTML</a>
+                <a class="dropdown-item" href="courses">WordPress</a>
+                <a class="dropdown-item" href="courses">Laravel</a>
+                <a class="dropdown-item" href="courses">JavaScript</a>
+                <a class="dropdown-item" href="courses">Python</a>
+              </div>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= page_name === 'blog' && 'active' %>" href="blog">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= page_name === 'about' && 'active' %>" href="about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <%= page_name === 'contact' && 'active' %>" href="contact">Contact</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav absolute-right">
+            <li>
+              <a href="login">Login</a> / <a href="register">Register</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+  </header>

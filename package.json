@@ -1,0 +1,23 @@
+{
+  "name": "oiken",
+  "version": "1.0.0",
+  "description": "Education platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "education",
+    "platform",
+    "edu"
+  ],
+  "author": "Alanapapa",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
