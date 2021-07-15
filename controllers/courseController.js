@@ -18,6 +18,14 @@ exports.createCourse = async (req, res) => {
 
 exports.getAllCourses = async (req, res) => {
   try {
+    const page = req.query.page || 1;
+    const perPage = 2;
+    const totalCourses = await Course.find().countDocuments();
+    
+
+
+
+
     const categorySlug = req.query.categories;
     const category = await Category.findOne({ slug: categorySlug });
 
@@ -26,12 +34,16 @@ exports.getAllCourses = async (req, res) => {
       filter = { category: category._id };
     }
 
-    const courses = await Course.find(filter);
+    const courses = await Course.find(filter).sort('-date')
+    .skip((page - 1) * perPage)
+    .limit(perPage);
     const categories = await Category.find();
     res.status(200).render("courses", {
       courses,
       categories,
       categorySlug,
+      current: page,
+      pages: Math.ceil(totalCourses / perPage),
       page_name: "courses",
     });
   } catch (error) {

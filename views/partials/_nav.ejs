@@ -15,9 +15,9 @@
             <li class="nav-item dropdown">
               <a class="nav-link <%= page_name === 'courses' && 'active' %>" href="/courses">Courses</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link <%= page_name === 'blogs' && 'active' %>" href="/blogs">Blog</a>
-            </li>
+            </li> -->
             <li class="nav-item">
               <a class="nav-link <%= page_name === 'about' && 'active' %>" href="/about">About</a>
             </li>
@@ -35,7 +35,8 @@
           <% if(userIN) { %>
             <ul class="navbar-nav absolute-right">
               <li>
-                <a href="/login">Profile</a> / <a href="/register">Sign Out</a>
+                <!-- <a href="#">Hello</a> / -->
+                <a href="/users/logout">Sign Out</a>
               </li>
             </ul>
             <% } %>

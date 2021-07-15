@@ -1,6 +1,7 @@
 const Course = require("../models/Course");
 
 exports.getIndexPage = async (req, res) => {
+  console.log(req.session.userID)
   const courses = await Course.find();
   res.status(200).render("index", {
     courses,
