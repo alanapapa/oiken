@@ -1,21 +1,15 @@
-exports.getIndexPage = (req, res) => {
+const Course = require("../models/Course");
+
+exports.getIndexPage = async (req, res) => {
+  const courses = await Course.find();
   res.status(200).render("index", {
+    courses,
     page_name: "index",
   });
 };
 exports.getAboutPage = (req, res) => {
   res.status(200).render("about", {
     page_name: "about",
-  });
-};
-exports.getCoursesPage = (req, res) => {
-  res.status(200).render("courses", {
-    page_name: "courses",
-  });
-};
-exports.getCourseSingle = (req, res) => {
-  res.status(200).render("course", {
-    page_name: "course",
   });
 };
 exports.getContactPage = (req, res) => {

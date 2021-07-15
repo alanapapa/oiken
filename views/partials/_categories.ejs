@@ -1,0 +1,8 @@
+<div class="block-24 mb-5">
+    <h3 class="heading">Categories</h3>
+    <ul>
+      <% for (let i=0; i < categories.length; i++) { %>
+      <li><a href="/courses?categories=<%= categories[i].slug %>" class="<%= categories[i].slug === categorySlug && 'active' %>"><%= categories[i].name %></a></li>
+      <% } %>
+    </ul>
+  </div>

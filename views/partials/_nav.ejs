@@ -13,29 +13,21 @@
               <a class="nav-link <%= page_name === 'index' && 'active' %>" href="/">Home</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link <%= page_name === 'courses' && 'active' %> dropdown-toggle" href="courses" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Courses</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown04">
-                <a class="dropdown-item" href="courses">HTML</a>
-                <a class="dropdown-item" href="courses">WordPress</a>
-                <a class="dropdown-item" href="courses">Laravel</a>
-                <a class="dropdown-item" href="courses">JavaScript</a>
-                <a class="dropdown-item" href="courses">Python</a>
-              </div>
-
+              <a class="nav-link <%= page_name === 'courses' && 'active' %>" href="/courses">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <%= page_name === 'blog' && 'active' %>" href="blog">Blog</a>
+              <a class="nav-link <%= page_name === 'blog' && 'active' %>" href="/blog">Blog</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <%= page_name === 'about' && 'active' %>" href="about">About</a>
+              <a class="nav-link <%= page_name === 'about' && 'active' %>" href="/about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <%= page_name === 'contact' && 'active' %>" href="contact">Contact</a>
+              <a class="nav-link <%= page_name === 'contact' && 'active' %>" href="/contact">Contact</a>
             </li>
           </ul>
           <ul class="navbar-nav absolute-right">
             <li>
-              <a href="login">Login</a> / <a href="register">Register</a>
+              <a href="/login">Login</a> / <a href="/register">Register</a>
             </li>
           </ul>
           

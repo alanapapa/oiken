@@ -1,0 +1,20 @@
+<div class="block-25 mb-5">
+    <div class="heading">Recent Courses</div>
+    <ul>
+      <% let i = 0; while (i < 3 && i < courses.length) { %>
+        <li>
+          <a href="#" class="d-flex">
+            <figure class="image mr-3">
+              <img src="/images/img_2_b.jpg" alt="" class="img-fluid" />
+            </figure>
+            <div class="text">
+              <h3 class="heading">
+                <%= courses[i].name %>
+              </h3>
+              <span class="meta">$<%= courses[i].details.price %></span>
+            </div>
+          </a>
+        </li>
+        <% i++ } %>
+    </ul>
+  </div>
