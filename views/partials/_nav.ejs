@@ -16,7 +16,7 @@
               <a class="nav-link <%= page_name === 'courses' && 'active' %>" href="/courses">Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link <%= page_name === 'blog' && 'active' %>" href="/blog">Blog</a>
+              <a class="nav-link <%= page_name === 'blogs' && 'active' %>" href="/blogs">Blog</a>
             </li>
             <li class="nav-item">
               <a class="nav-link <%= page_name === 'about' && 'active' %>" href="/about">About</a>
@@ -25,11 +25,20 @@
               <a class="nav-link <%= page_name === 'contact' && 'active' %>" href="/contact">Contact</a>
             </li>
           </ul>
+          <% if(!userIN) { %>
           <ul class="navbar-nav absolute-right">
             <li>
               <a href="/login">Login</a> / <a href="/register">Register</a>
             </li>
           </ul>
+          <% } %>
+          <% if(userIN) { %>
+            <ul class="navbar-nav absolute-right">
+              <li>
+                <a href="/login">Profile</a> / <a href="/register">Sign Out</a>
+              </li>
+            </ul>
+            <% } %>
           
         </div>
       </div>

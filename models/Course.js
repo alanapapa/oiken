@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
+const crypto = require("crypto");
 const Schema = mongoose.Schema;
 
 const CourseSchema = new Schema({
   name: {
     type: String,
-    unique: true,
-    required: true,
+    required: true
   },
   description: {
     type: String,
@@ -29,7 +29,6 @@ const CourseSchema = new Schema({
     lectures: { type: Number, default: 0, min: 0 },
     quizzes: { type: Number, default: 0, min: 0 },
     certificate: { type: Boolean, default: false },
-    // lang: { type: Schema.Types.ObjectId, ref: 'Language' },
     price: { type: Number, default: 0 },
   },
   slug: {
@@ -38,14 +37,15 @@ const CourseSchema = new Schema({
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
-  }
+    ref: "Category",
+  },
 });
 
 CourseSchema.pre("validate", function (next) {
-  this.slug = slugify(this.name, {
+  const uniqSlug = this.name + '-' + crypto.randomBytes(2).toString("hex");
+  this.slug = slugify(uniqSlug, {
     lower: true,
-    strict: true,
+    strict: true
   });
   next();
 });

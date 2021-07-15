@@ -104,7 +104,7 @@
               </p>
             </div>
             <p>
-              <a href="#" class="btn btn-primary reverse py-2 px-4"
+              <a href="/about" class="btn btn-primary reverse py-2 px-4"
                 >Read More</a
               >
             </p>
@@ -276,8 +276,8 @@
             qui neque sint eveniet tempore sapiente.
           </p>
           <p>
-            <a href="#" class="btn btn-primary py-2 px-4"
-              ><span class="ion-ios-book mr-2"></span>Enroll Now</a
+            <a href="/courses" class="btn btn-primary py-2 px-4"
+              ><span class="ion-ios-book mr-2"></span>All Courses</a
             >
           </p>
         </div>
@@ -285,7 +285,7 @@
     </div>
     <div class="container-fluid block-11 element-animate">
       <div class="nonloop-block-11 owl-carousel">
-        <% for (let i=0; i < courses.length; i++) { %>
+        <% let i = 0; while(i < 6 && i < courses.length) { %>
 
           <div class="item">
             <div class="block-19">
@@ -312,7 +312,7 @@
               </div>
             </div>
           </div>
-          <% } %>
+          <% i++ } %>
       </div>
     </div>
   </div>
