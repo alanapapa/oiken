@@ -6,12 +6,10 @@ exports.createCourse = async (req, res) => {
   try {
     const course = await Course.create(req.body);
     const path = "/users/create/" + course.slug;
+    req.flash('success', `${course.name} has been created successfully!`);
     res.status(201).redirect(path);
   } catch (error) {
-    res.status(400).json({
-      status: "yes fail",
-      error,
-    });
+    res.status(400).redirect('back');
   }
 };
 
@@ -22,6 +20,8 @@ exports.getAllCourses = async (req, res) => {
     const totalCourses = await Course.find().countDocuments();
 
     const categorySlug = req.query.categories;
+    const query = req.query.search;
+
     const category = await Category.findOne({ slug: categorySlug });
 
     let filter = {};
@@ -29,10 +29,27 @@ exports.getAllCourses = async (req, res) => {
       filter = { category: category._id };
     }
 
-    const courses = await Course.find(filter)
+    if (query) {
+      filter = {name: query};
+    }
+
+    if (!query && !category) {
+      filter.name = "";
+      filter.category = null;
+    }
+
+    const courses = await Course.find({
+      $or:[
+        {name: { $regex: '.*' + filter.name + '.*', $options: 'i'}},
+        {category: filter.category}
+      ]
+    })
       .sort("-createdAt")
       .skip((page - 1) * perPage)
-      .limit(perPage);
+      .limit(perPage)
+      .populate('author');
+
+      
     const categories = await Category.find();
     res.status(200).render("courses", {
       courses,

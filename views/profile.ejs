@@ -23,6 +23,17 @@
             <span class="current">Profile</span>
           </p>
         </div>
+        <% if (flashMessages) { %>
+          <% if (flashMessages.success) { %>
+        <div class="alert alert-success">
+          <%= flashMessages.success %>
+        </div>
+        <% } else if (flashMessages.error)  {%>
+          <div class="alert alert-danger">
+            <%= flashMessages.error %>
+          </div>
+          <% } %>
+        <% } %>
       </div>
     </div>
   </div>
@@ -157,7 +168,7 @@
       </div>
       <div class="container-fluid block-11 element-animate">
         <div class="nonloop-block-11 owl-carousel">
-          <% let i=0; while(i < 6 && i < courses.length) { %>
+          <% let i=0; while(i < courses.length) { %>
           <div class="item">
             <div class="block-19">
               <figure>
@@ -273,6 +284,7 @@
                           name="name"
                           class="form-control"
                           placeholder="Course Name"
+                          required
                         />
                       </div>
                     </div>
@@ -282,7 +294,7 @@
                           rows="8"
                           name="description"
                           class="form-control"
-                          placeholder="Course Description"
+                          placeholder="Description"
                           required
                         ></textarea>
                       </div>

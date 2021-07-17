@@ -42,6 +42,17 @@
                 </span>
               </p>
             </div>
+            <% if (flashMessages) { %>
+              <% if (flashMessages.success) { %>
+            <div class="alert alert-success">
+              <%= flashMessages.success %>
+            </div>
+            <% } else if (flashMessages.error)  {%>
+              <div class="alert alert-danger">
+                <%= flashMessages.error %>
+              </div>
+              <% } %>
+            <% } %>
           </div>
         </div>
       </div>

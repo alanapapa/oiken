@@ -71,9 +71,10 @@
               </form>
               <% } %>
             </div>
+            <% if(user && (user.courses.includes(course._id))) { %>
             <div class="row">
               <div class="col-md-12 mb-2">
-                <h2>Lesson</h2>
+                <h2 id="lesson">Lesson</h2>
               </div>
             </div>
             <div class="row bg-light align-items-center p-4 episode">
@@ -147,6 +148,7 @@
                 <a href="#" class="play"><span class="ion-ios-play"></span></a>
               </div>
             </div>
+            <% } %>
           </div>
         </section>
       </div>

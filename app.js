@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
-const flash = require('connect-flash');
+var flash = require('connect-flash');
+
 const MongoStore = require('connect-mongo');
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
@@ -24,6 +25,8 @@ mongoose
   .then(() => {
     console.log("DB Connected Successfully");
   });
+
+
 
 // temp engine
 app.set("view engine", "ejs");
@@ -57,6 +60,11 @@ app.use(
   })
 );
 app.use(flash());
+app.use((req, res, next)=> {
+  res.locals.flashMessages = req.flash();
+  next();
+})
+
 
 
 // routes

@@ -16,16 +16,17 @@
               <h2 class="heading text-center mb-4">
                 Find Online Courses That Suits You
               </h2>
-              <form action="" method="post" class="d-block d-lg-flex mb-4">
+              <form action="/courses" method="GET" class="d-block d-lg-flex mb-4">
                 <div class="fields d-block d-lg-flex">
                   <div class="textfield-search one-third">
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Keyword search..."
+                      name="search"
+                      placeholder="Search..."
                     />
                   </div>
-                  <div class="select-wrap one-third">
+                  <!-- <div class="select-wrap one-third">
                     <div class="icon">
                       <span class="ion-ios-arrow-down"></span>
                     </div>
@@ -36,7 +37,7 @@
                       <option value="">JavaScript</option>
                       <option value="">Python</option>
                     </select>
-                  </div>
+                  </div> -->
                 </div>
                 <input
                   type="submit"
@@ -289,7 +290,7 @@
   </div>
   <!-- END section -->
 
-  <div class="container site-section element-animate">
+  <!-- <div class="container site-section element-animate">
     <div class="row justify-content-center mb-5">
       <div class="col-md-7 text-center section-heading">
         <h2 class="text-primary heading">Teachers</h2>
@@ -313,7 +314,6 @@
               </div>
             </div>
             <div class="back">
-              <!-- back content -->
               <blockquote>
                 <p>
                   &ldquo;Even the all-powerful Pointing has no control about the
@@ -333,7 +333,6 @@
             </div>
           </div>
         </div>
-        <!-- .flip-container -->
       </div>
 
       <div class="col-md-6 col-lg-4">
@@ -349,7 +348,6 @@
               </div>
             </div>
             <div class="back">
-              <!-- back content -->
               <blockquote>
                 <p>
                   &ldquo;Even the all-powerful Pointing has no control about the
@@ -369,7 +367,6 @@
             </div>
           </div>
         </div>
-        <!-- .flip-container -->
       </div>
 
       <div class="col-md-6 col-lg-4">
@@ -385,7 +382,6 @@
               </div>
             </div>
             <div class="back">
-              <!-- back content -->
               <blockquote>
                 <p>
                   &ldquo;Even the all-powerful Pointing has no control about the
@@ -405,10 +401,9 @@
             </div>
           </div>
         </div>
-        <!-- .flip-container -->
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- END .block-2 -->
 
   <%- include('partials/_subscribe') -%> <%- include('partials/_footer') -%>
