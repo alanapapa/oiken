@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
@@ -55,6 +56,8 @@ app.use(
     store: MongoStore.create({ mongoUrl: 'mongodb://localhost/oiken-db' })
   })
 );
+app.use(flash());
+
 
 // routes
 app.use("*", (req, res, next) => {

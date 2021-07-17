@@ -1,0 +1,337 @@
+<%- include('partials/_head') -%> <%- include('partials/_nav') -%> <% if(user) {
+%>
+<section
+  class="site-hero site-sm-hero overlay"
+  style="background-image: url(/images/big_image_2.jpg); min-height: 350px"
+>
+  <div class="container">
+    <div
+      class="row align-items-center justify-content-center site-hero-sm-inner"
+      style="min-height: 350px"
+    >
+      <div class="col-md-7 text-center">
+        <div class="mb-5 element-animate">
+          <h1 class="mb-2">
+            <% if(user.role==='student' ) { %> Hello, <%= user.username %> <% }
+            else if (user.role==='teacher' ) { %> Hello, <%= user.username %> <%
+            } else if(user.role==='admin' ) { %> Hello, <%= user.username %> <%
+            } %>
+          </h1>
+          <p class="bcrumb">
+            <a href="/">Home</a>
+            <span class="sep ion-android-arrow-dropright px-2"></span>
+            <span class="current">Profile</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<% if(user.role==='student' ) { %>
+<!-- STUDENT -->
+
+<% if(user.courses.length > 0) { %>
+<div class="site-section bg-light" style="padding-top: 0">
+  <div class="container">
+    <div class="row justify-content-center mb-5 element-animate">
+      <div class="col-md-7 text-center section-heading">
+        <h2 class="text-primary heading">Enrolled Courses</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid block-11 element-animate">
+    <div class="nonloop-block-11 owl-carousel">
+      <% for(let i = 0; i < user.courses.length; i++) { %>
+      <div class="item">
+        <div class="block-19">
+          <figure>
+            <img src="/images/img_1.jpg" alt="Image" class="img-fluid" />
+          </figure>
+          <div class="text">
+            <h2 class="heading">
+              <a href="/courses/course/<%= user.courses[i].slug  %>">
+                <%= user.courses[i].name %>
+              </a>
+            </h2>
+            <p class="mb-4"><%= user.courses[i].description %> ...</p>
+          </div>
+          <div class="col-lg-12 text-center">
+            <form action="/courses/leave" method="POST">
+              <input
+                type="hidden"
+                name="course_id"
+                value="<%= user.courses[i]._id %>"
+              />
+              <button
+                type="submit"
+                name="leave"
+                class="btn btn-primary btn-danger reverse py-2 px-4"
+                onclick="return confirm('ARE YOU SURE?')"
+              >
+                LEAVE
+              </button>
+            </form>
+            <br /><br />
+          </div>
+        </div>
+      </div>
+      <% i++ } %>
+    </div>
+  </div>
+  <% } else { %>
+  <div class="site-section bg-light">
+    <div class="container">
+      <div class="row justify-content-center mb-5 element-animate">
+        <div class="col-md-7 text-center section-heading">
+          <h2 class="text-primary heading">You have not enrolled in courses</h2>
+        </div>
+      </div>
+    </div>
+    <% }%>
+    <!-- END section -->
+
+    <!-- END STUDENT -->
+    <% } else if (user.role==='teacher' ) { %>
+    <!-- TEACHER -->
+    <div
+      class="site-section bg-light element-animate"
+      style="padding-bottom: 0"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 order-md-2 mb-5">
+            <div class="block-28 text-center mb-5">
+              <figure>
+                <img src="/images/person_3.jpg" alt="" class="img-fluid" />
+              </figure>
+              <h2 class="heading">Mark Stewart</h2>
+              <h3 class="subheading">JavaScript Ninja</h3>
+              <p>
+                <a href="#" class="fa fa-twitter p-2"></a>
+                <a href="#" class="fa fa-facebook p-2"></a>
+                <a href="#" class="fa fa-linkedin p-2"></a>
+              </p>
+              <p>
+                Hi I'm Mark Stewart, consectetur adipisicing elit. Quibusdam
+                nulla beatae modi itaque nemo magni molestiae explicabo sint
+                dolorum cum! Nam iste eligendi autem voluptates illo veritatis
+                veniam laudantium enim!
+              </p>
+            </div>
+          </div>
+
+          <!-- change password -->
+          <div class="col-md-6 col-lg-6 order-md-2 mb-5">
+            <h3 class="heading mb-5">Change password</h3>
+            <form action="#" method="post">
+              <div class="col-md-12 form-group">
+                <label for="name">Old password</label>
+                <input type="text" id="name" class="form-control py-2" />
+              </div>
+              <div class="col-md-12 form-group">
+                <label for="phone">New password</label>
+                <input type="text" id="phone" class="form-control py-2" />
+              </div>
+              <div class="col-md-12 form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control py-2" />
+              </div>
+              <div class="col-md-6 form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+              </div>
+            </form>
+          </div>
+          <!-- END - change password -->
+        </div>
+      </div>
+    </div>
+
+    <% if(courses.length > 0) { %>
+    <div class="site-section bg-light" style="padding-top: 0">
+      <div class="container">
+        <div class="row justify-content-center mb-5 element-animate">
+          <div class="col-md-7 text-center section-heading">
+            <h2 class="text-primary heading">Your Courses</h2>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid block-11 element-animate">
+        <div class="nonloop-block-11 owl-carousel">
+          <% let i=0; while(i < 6 && i < courses.length) { %>
+          <div class="item">
+            <div class="block-19">
+              <figure>
+                <img src="/images/img_1.jpg" alt="Image" class="img-fluid" />
+              </figure>
+              <div class="text">
+                <h2 class="heading">
+                  <a href="/courses/course/<%= courses[i].slug  %>">
+                    <%= courses[i].name %>
+                  </a>
+                </h2>
+                <p class="mb-4"><%= courses[i].description %> ...</p>
+              </div>
+              <div class="col-lg-12 text-center">
+                <a href="/users/create/<%= courses[i].slug %>"
+                  ><button
+                    class="btn btn-primary btn-warning reverse py-2 px-4"
+                  >
+                    Edit
+                  </button></a
+                >
+                <a href="/users/delete/<%= courses[i].slug %>"
+                  ><button
+                    class="btn btn-primary btn-danger reverse py-2 px-4"
+                    onclick="return confirm('ARE YOU SURE?')"
+                  >
+                    Delete
+                  </button></a
+                >
+                <br /><br />
+              </div>
+            </div>
+          </div>
+          <% i++ } %>
+        </div>
+      </div>
+      <% } else { %>
+      <div class="site-section bg-light">
+        <div class="container">
+          <div class="row justify-content-center mb-5 element-animate">
+            <div class="col-md-7 text-center section-heading">
+              <h2 class="text-primary heading">You have not courses</h2>
+            </div>
+          </div>
+        </div>
+        <% }%>
+        <!-- END section -->
+
+        <!-- CREATE NEW COURSE -->
+        <br /><br />
+        <div class="col-lg-12 text-center">
+          <p>
+            <a
+              href="#"
+              data-toggle="modal"
+              data-target="#addCourse"
+              class="btn btn-primary submit"
+              ><span class="ion-ios-book mr-2"></span>Create New Course</a
+            >
+          </p>
+        </div>
+      </div>
+      <!-- END - CREATE NEW COURSE -->
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="addCourse"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-body customer-box">
+              <h2>Create New Course</h2>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div class="tab-pane active" id="Login">
+                  <form
+                    role="form"
+                    class="form-horizontal"
+                    method="POST"
+                    action="/courses"
+                  >
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input
+                          type="hidden"
+                          name="role"
+                          value="<%= user.role %>"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input
+                          type="hidden"
+                          name="author"
+                          value="<%= user._id %>"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input
+                          type="text"
+                          name="name"
+                          class="form-control"
+                          placeholder="Course Name"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <textarea
+                          rows="8"
+                          name="description"
+                          class="form-control"
+                          placeholder="Course Description"
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <select name="category" required>
+                          <option value="" selected disabled hidden>
+                            Choose Course Category
+                          </option>
+                          <% for (let i=0;i < categories.length; i++) { %>
+                          <option value="<%= categories[i]._id %>">
+                            <%= categories[i].name %>
+                          </option>
+                          <% } %>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 text-center">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-success reverse py-2 px-4"
+                        >
+                          Submit
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-warning reverse py-2 px-4"
+                          data-dismiss="modal"
+                          aria-hidden="true"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END - Modal -->
+
+      <!-- END TEACHER -->
+      <!-- ADMIN -->
+
+      <% } else if(user.role==='admin' ) { %> HELLO, ADMIN <% } %> <% } %>
+      <!-- END ADMIN -->
+
+      <%- include('partials/_subscribe') -%> <%-include('partials/_footer') -%>

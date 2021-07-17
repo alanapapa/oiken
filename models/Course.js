@@ -16,10 +16,10 @@ const CourseSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  // author: {
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'User'
-  // },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   details: {
     duration: {
       period: String,

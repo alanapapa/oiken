@@ -2,7 +2,6 @@
 
 <section
   class="site-hero site-sm-hero overlay"
-  data-stellar-background-ratio="0.5"
   style="background-image: url(/images/big_image_2.jpg)"
 >
   <div class="container">
@@ -65,24 +64,33 @@
         <div class="row mb-5">
           <div class="col-md-12 text-center">
             <div class="block-27">
-              <% if (pages > 0 && !!categories) { %>
-              <ul>
-                <% for(let i = 1; i <= pages; i++) { %> <% if (i == current) {
-                %>
-                
-                
-                
-                <li class="active">
-                  <span><a href="?page=<%= i %>"><%= i %></a></span>
-                </li>
-                <% } else if (i < pages) { %>
-                <li><a href="?page=<%= 1 %>">&lt;</a></li>
-                <li><a href="?page=<%= i %>"><%= i %></a></li>
-                <% } else { %>
-                <li><a href="?page=<%= i %>"><%= i %></a></li>
-                <li><a href="?page=<%= i %>">&gt;</a></li>
-                <% } %> <% } %>
-              </ul>
+              <% if (pages > 0 ) { %>
+                <ul>
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>First</a></li>
+                    <% } else { %>
+                        <li><a href="?page=1">First</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="?page=<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li><a href="?page=<%= i-1 %>">Last</a></li>
+                    <% } %>
+                </ul>
               <% } %>
             </div>
           </div>

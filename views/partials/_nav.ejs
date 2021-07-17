@@ -28,14 +28,14 @@
           <% if(!userIN) { %>
           <ul class="navbar-nav absolute-right">
             <li>
-              <a href="/login">Login</a> / <a href="/register">Register</a>
+              <a href="/login" id="<%= page_name === 'login' && 'active' %>">Login</a> / <a href="/register" class="<%= page_name === 'register' && 'active' %>">Register</a>
             </li>
           </ul>
           <% } %>
           <% if(userIN) { %>
             <ul class="navbar-nav absolute-right">
               <li>
-                <!-- <a href="#">Hello</a> / -->
+                <a href="/users/profile">Profile</a> /
                 <a href="/users/logout">Sign Out</a>
               </li>
             </ul>
