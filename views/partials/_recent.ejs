@@ -2,19 +2,21 @@
     <div class="heading">Recent Courses</div>
     <ul>
       <% let i = 0; while (i < 3 && i < courses.length) { %>
+        <% if(courses[i].publish === true) { %>
         <li>
           <a href="/courses/course/<%= courses[i].slug %>" class="d-flex">
             <figure class="image mr-3">
-              <img src="/images/img_2_b.jpg" alt="" class="img-fluid" />
+              <img src="<%= courses[i].image != null && courses[i].image || '/images/img_2_b.jpg' %>" alt="" class="img-fluid" />
             </figure>
             <div class="text">
               <h3 class="heading">
                 <%= courses[i].name %>
               </h3>
-              <span class="meta">$<%= courses[i].details.price %></span>
+              <span class="meta"><%= courses[i].category.name %></span>
             </div>
           </a>
         </li>
+        <% } %>
         <% i++ } %>
     </ul>
   </div>

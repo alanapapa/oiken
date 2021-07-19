@@ -1,9 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
-var flash = require('connect-flash');
-
-const MongoStore = require('connect-mongo');
+const flash = require("connect-flash");
+const fileupload = require('express-fileupload');
+const methodOverride = require("method-override");
+const MongoStore = require("connect-mongo");
 const pageRoute = require("./routes/pageRoute");
 const courseRoute = require("./routes/courseRoute");
 const blogRoute = require("./routes/blogRoute");
@@ -25,8 +26,6 @@ mongoose
   .then(() => {
     console.log("DB Connected Successfully");
   });
-
-
 
 // temp engine
 app.set("view engine", "ejs");
@@ -56,16 +55,20 @@ app.use(
     secret: "jeti_qazyna",
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/oiken-db' })
+    store: MongoStore.create({ mongoUrl: "mongodb://localhost/oiken-db" }),
   })
 );
 app.use(flash());
-app.use((req, res, next)=> {
+app.use((req, res, next) => {
   res.locals.flashMessages = req.flash();
   next();
-})
-
-
+});
+app.use(fileupload());
+app.use(
+  methodOverride("_method", {
+    methods: ["POST", "GET"],
+  })
+);
 
 // routes
 app.use("*", (req, res, next) => {
@@ -83,7 +86,7 @@ app.use((req, res) => {
   res.status(404).redirect("/404");
 });
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App started on port ${port}`);
 });

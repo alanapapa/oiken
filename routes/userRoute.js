@@ -8,6 +8,7 @@ const courseController = require('../controllers/courseController');
 
 const router = express.Router();
 
+router.route('/').get(authController.loginUser);
 router.route('/signup').post(
     [
         body('username').not().isEmpty().withMessage(' Please Enter Your Name'),
@@ -25,7 +26,8 @@ router.route('/login').post(authController.loginUser);
 router.route('/logout').get(authController.logoutUser);
 router.route('/profile').get(authMiddleware, authController.getProfilePage);
 router.route('/create/:slug').get(authController.getCourseCreatePage);
-router.route('/delete/:slug').get(authController.deleteCourse);
+router.route('/:id').delete(authController.deleteUser);
+router.route('/subscribe').post(authController.subscribeUser);
 
 
 

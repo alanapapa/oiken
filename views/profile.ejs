@@ -12,10 +12,9 @@
       <div class="col-md-7 text-center">
         <div class="mb-5 element-animate">
           <h1 class="mb-2">
-            <% if(user.role==='student' ) { %> Hello, <%= user.username %> <% }
-            else if (user.role==='teacher' ) { %> Hello, <%= user.username %> <%
-            } else if(user.role==='admin' ) { %> Hello, <%= user.username %> <%
-            } %>
+            <% if(user.role==='student' ) { %><%= user.username %> <% } else if
+            (user.role==='teacher' ) { %><%= user.username %> <% } else
+            if(user.role==='admin' ) { %><%= user.username %> <% } %>
           </h1>
           <p class="bcrumb">
             <a href="/">Home</a>
@@ -23,17 +22,11 @@
             <span class="current">Profile</span>
           </p>
         </div>
-        <% if (flashMessages) { %>
-          <% if (flashMessages.success) { %>
-        <div class="alert alert-success">
-          <%= flashMessages.success %>
-        </div>
-        <% } else if (flashMessages.error)  {%>
-          <div class="alert alert-danger">
-            <%= flashMessages.error %>
-          </div>
-          <% } %>
-        <% } %>
+        <% if (flashMessages) { %> <% if (flashMessages.success) { %>
+        <div class="alert alert-success"><%= flashMessages.success %></div>
+        <% } else if (flashMessages.error) {%>
+        <div class="alert alert-danger"><%= flashMessages.error %></div>
+        <% } %> <% } %>
       </div>
     </div>
   </div>
@@ -42,7 +35,7 @@
 <!-- STUDENT -->
 
 <% if(user.courses.length > 0) { %>
-<div class="site-section bg-light" style="padding-top: 0">
+<div class="site-section bg-light">
   <div class="container">
     <div class="row justify-content-center mb-5 element-animate">
       <div class="col-md-7 text-center section-heading">
@@ -56,7 +49,7 @@
       <div class="item">
         <div class="block-19">
           <figure>
-            <img src="/images/img_1.jpg" alt="Image" class="img-fluid" />
+            <img src="<%= courses[i].image != null && courses[i].image || '/images/img_1.jpg' %>" alt="Image" class="img-fluid" />
           </figure>
           <div class="text">
             <h2 class="heading">
@@ -104,61 +97,9 @@
     <!-- END STUDENT -->
     <% } else if (user.role==='teacher' ) { %>
     <!-- TEACHER -->
-    <div
-      class="site-section bg-light element-animate"
-      style="padding-bottom: 0"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-lg-6 order-md-2 mb-5">
-            <div class="block-28 text-center mb-5">
-              <figure>
-                <img src="/images/person_3.jpg" alt="" class="img-fluid" />
-              </figure>
-              <h2 class="heading">Mark Stewart</h2>
-              <h3 class="subheading">JavaScript Ninja</h3>
-              <p>
-                <a href="#" class="fa fa-twitter p-2"></a>
-                <a href="#" class="fa fa-facebook p-2"></a>
-                <a href="#" class="fa fa-linkedin p-2"></a>
-              </p>
-              <p>
-                Hi I'm Mark Stewart, consectetur adipisicing elit. Quibusdam
-                nulla beatae modi itaque nemo magni molestiae explicabo sint
-                dolorum cum! Nam iste eligendi autem voluptates illo veritatis
-                veniam laudantium enim!
-              </p>
-            </div>
-          </div>
-
-          <!-- change password -->
-          <div class="col-md-6 col-lg-6 order-md-2 mb-5">
-            <h3 class="heading mb-5">Change password</h3>
-            <form action="#" method="post">
-              <div class="col-md-12 form-group">
-                <label for="name">Old password</label>
-                <input type="text" id="name" class="form-control py-2" />
-              </div>
-              <div class="col-md-12 form-group">
-                <label for="phone">New password</label>
-                <input type="text" id="phone" class="form-control py-2" />
-              </div>
-              <div class="col-md-12 form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" class="form-control py-2" />
-              </div>
-              <div class="col-md-6 form-group">
-                <input type="submit" value="Send" class="btn btn-primary" />
-              </div>
-            </form>
-          </div>
-          <!-- END - change password -->
-        </div>
-      </div>
-    </div>
 
     <% if(courses.length > 0) { %>
-    <div class="site-section bg-light" style="padding-top: 0">
+    <div class="site-section bg-light">
       <div class="container">
         <div class="row justify-content-center mb-5 element-animate">
           <div class="col-md-7 text-center section-heading">
@@ -172,7 +113,7 @@
           <div class="item">
             <div class="block-19">
               <figure>
-                <img src="/images/img_1.jpg" alt="Image" class="img-fluid" />
+                <img src="<%= courses[i].image != null && courses[i].image || '/images/img_1.jpg' %>" alt="Image" class="img-fluid" />
               </figure>
               <div class="text">
                 <h2 class="heading">
@@ -180,7 +121,9 @@
                     <%= courses[i].name %>
                   </a>
                 </h2>
-                <p class="mb-4"><%= courses[i].description %> ...</p>
+                <p class="mb-4">
+                  <%= courses[i].description.substring(0, 100) %> ...
+                </p>
               </div>
               <div class="col-lg-12 text-center">
                 <a href="/users/create/<%= courses[i].slug %>"
@@ -190,7 +133,7 @@
                     Edit
                   </button></a
                 >
-                <a href="/users/delete/<%= courses[i].slug %>"
+                <a href="/courses/<%= courses[i].slug %>?_method=DELETE"
                   ><button
                     class="btn btn-primary btn-danger reverse py-2 px-4"
                     onclick="return confirm('ARE YOU SURE?')"
@@ -210,7 +153,7 @@
         <div class="container">
           <div class="row justify-content-center mb-5 element-animate">
             <div class="col-md-7 text-center section-heading">
-              <h2 class="text-primary heading">You have not courses</h2>
+              <h2 class="text-primary heading">You have no courses to teach</h2>
             </div>
           </div>
         </div>
@@ -256,6 +199,7 @@
                     class="form-horizontal"
                     method="POST"
                     action="/courses"
+                    encType="multipart/form-data"
                   >
                     <div class="form-group">
                       <div class="col-sm-12">
@@ -282,6 +226,7 @@
                         <input
                           type="text"
                           name="name"
+                          maxlength="30"
                           class="form-control"
                           placeholder="Course Name"
                           required
@@ -293,6 +238,7 @@
                         <textarea
                           rows="8"
                           name="description"
+                          maxlength="200"
                           class="form-control"
                           placeholder="Description"
                           required
@@ -311,6 +257,11 @@
                           </option>
                           <% } %>
                         </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input type="file" name="image" class="form-control-file" placeholder="Image">
                       </div>
                     </div>
                     <div class="row">
@@ -340,10 +291,254 @@
       </div>
       <!-- END - Modal -->
 
+
+
+
+
+
+      <!-- ENROLLED COURSES -->
+      <% if(user.courses.length > 0) { %>
+        <div class="site-section bg-light">
+          <div class="container">
+            <div class="row justify-content-center mb-5 element-animate">
+              <div class="col-md-7 text-center section-heading">
+                <h2 class="text-primary heading">Enrolled Courses</h2>
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid block-11 element-animate">
+            <div class="nonloop-block-11 owl-carousel">
+              <% for(let i = 0; i < user.courses.length; i++) { %>
+              <div class="item">
+                <div class="block-19">
+                  <figure>
+                    <img src="<%= courses[i].image != null && courses[i].image || '/images/img_1.jpg' %>" alt="Image" class="img-fluid" />
+                  </figure>
+                  <div class="text">
+                    <h2 class="heading">
+                      <a href="/courses/course/<%= user.courses[i].slug  %>">
+                        <%= user.courses[i].name %>
+                      </a>
+                    </h2>
+                    <p class="mb-4"><%= user.courses[i].description %> ...</p>
+                  </div>
+                  <div class="col-lg-12 text-center">
+                    <form action="/courses/leave" method="POST">
+                      <input
+                        type="hidden"
+                        name="course_id"
+                        value="<%= user.courses[i]._id %>"
+                      />
+                      <button
+                        type="submit"
+                        name="leave"
+                        class="btn btn-primary btn-danger reverse py-2 px-4"
+                        onclick="return confirm('ARE YOU SURE?')"
+                      >
+                        LEAVE
+                      </button>
+                    </form>
+                    <br /><br />
+                  </div>
+                </div>
+              </div>
+              <% i++ } %>
+            </div>
+          </div>
+          <% } else { %>
+          <div class="site-section bg-light">
+            <div class="container">
+              <div class="row justify-content-center mb-5 element-animate">
+                <div class="col-md-7 text-center section-heading">
+                  <h2 class="text-primary heading">You have not enrolled in courses</h2>
+                </div>
+              </div>
+            </div>
+            <% }%>
+
       <!-- END TEACHER -->
       <!-- ADMIN -->
 
-      <% } else if(user.role==='admin' ) { %> HELLO, ADMIN <% } %> <% } %>
+      <% } %> <% if(user.role==='admin' ) { %>
+
+      <div class="container" style="padding-top: 50px;">
+        <div class="row justify-content-center mb-5 element-animate">
+          <table class="table">
+            <div class="col-lg-12 text-center">
+              <p>
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#addCategory"
+                  class="btn btn-primary submit"
+                  ><span class="ion-ios-book mr-2"></span>Add Category</a
+                >
+              </p>
+            </div>
+            <thead>
+              <h2>Categories</h2>
+              <tr>
+                <th scope="col">_id</th>
+                <th scope="col">name</th>
+                <th scope="col">delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < categories.length; i++) { %>
+              <tr>
+                <th scope="row"><%= categories[i]._id %></th>
+                <td><%= categories[i].name %></td>
+                <td>
+                  <a href="/categories/<%= categories[i]._id %>?_method=DELETE"
+                    ><button
+                      onclick="return confirm('ARE YOU SURE?')"
+                      class="btn btn-primary"
+                    >
+                      delete
+                    </button></a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row justify-content-center mb-5 element-animate">
+          <table class="table">
+            <thead>
+              <h2>Users</h2>
+              <tr>
+                <th scope="col">_id</th>
+                <th scope="col">username</th>
+                <th scope="col">email</th>
+                <th scope="col">role</th>
+                <th scope="col">delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < users.length; i++) { %>
+              <tr>
+                <th scope="row"><%= users[i]._id %></th>
+                <td><%= users[i].username %></td>
+                <td><%= users[i].email %></td>
+                <td><%= users[i].role %></td>
+                <td>
+                  <a href="/users/<%= users[i]._id %>?_method=DELETE"
+                    ><button
+                      onclick="return confirm('ARE YOU SURE?')"
+                      class="btn btn-primary"
+                    >
+                      delete
+                    </button></a
+                  >
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- pagination -->
+        <div class="row mb-5">
+          <div class="col-md-12 text-center">
+            <div class="block-27">
+              <% if (pages > 0 ) { %>
+              <ul>
+                <% if (current == 1) { %>
+                <li class="disabled" style="visibility: hidden">
+                  <a>First</a>
+                </li>
+                <% } else { %>
+                <li><a href="?page=1">First</a></li>
+                <% } %> <% var i = (Number(current) > 5 ? Number(current) - 4 :
+                1) %> <% if (i !== 1) { %>
+                <li class="disabled"><a>...</a></li>
+                <% } %> <% for (; i <= (Number(current) + 4) && i <= pages; i++)
+                { %> <% if (i == current) { %>
+                <li class="active"><a><%= i %></a></li>
+                <% } else { %>
+                <li><a href="?page=<%= i %>"><%= i %></a></li>
+                <% } %> <% if (i == Number(current) + 4 && i < pages) { %>
+                <li class="disabled"><a>...</a></li>
+                <% } %> <% } %> <% if (current == pages) { %>
+                <li class="disabled" style="visibility: hidden"><a>Last</a></li>
+                <% } else { %>
+                <li><a href="?page=<%= i-1 %>">Last</a></li>
+                <% } %>
+              </ul>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <!-- END - pagination -->
+      </div>
+
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="addCategory"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-body customer-box">
+              <h2>Add Category</h2>
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div class="tab-pane active" id="Categories">
+                  <form
+                    role="form"
+                    class="form-horizontal"
+                    method="POST"
+                    action="/categories"
+                  >
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <input
+                          type="text"
+                          name="name"
+                          maxlength="30"
+                          class="form-control"
+                          placeholder="Category Name"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-12 text-center">
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-success reverse py-2 px-4"
+                        >
+                          Submit
+                        </button>
+                        <button
+                          type="submit"
+                          class="btn btn-primary btn-warning reverse py-2 px-4"
+                          data-dismiss="modal"
+                          aria-hidden="true"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END - Modal -->
+
+      <% } %> <% } %>
       <!-- END ADMIN -->
 
       <%- include('partials/_subscribe') -%> <%-include('partials/_footer') -%>

@@ -33,20 +33,14 @@
           <div class="col-md-6 order-md-1">
             <div class="block-15">
               <div class="heading">
-                <h2>Company History</h2>
+                <h2>Project History</h2>
               </div>
               <div class="text mb-5">
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. A
-                  quibusdam nisi eos accusantium eligendi velit deleniti nihil ad
-                  deserunt rerum incidunt nulla nemo eius molestiae architecto
-                  beatae asperiores doloribus animi.
+                  Oiken is translated from the Kazakh language as "Oi" - mind, "ken" - inexhaustible rich source. This is my educational project for learning backend development with nodeJS.
                 </p>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos
-                  quaerat aliquid blanditiis eum asperiores obcaecati, id officiis
-                  voluptate sint est excepturi quam itaque dicta delectus.
-                  Consequuntur, blanditiis maxime? Cupiditate, cum.
+                  I would be grateful for new ideas and suggestions for finalizing the project. All sources are publicly available on Github.<br>Hope you enjoy.
                 </p>
               </div>
             </div>
@@ -56,63 +50,77 @@
     </section>
     <!-- END section -->
 
-    <section class="site-section pt-3 element-animate">
+    <section class="site-section pt-3 element-animate" id="section-counter">
       <div class="container">
         <div class="row justify-content-center mb-5 element-animate">
           <div class="col-md-7 text-center section-heading">
-            <h2 class="text-primary heading">School Services</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-              qui neque sint eveniet tempore sapiente.
-            </p>
+            <h2 class="text-primary heading">Oiken Today</h2>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-lg-3">
-            <div class="media block-6 d-block">
-              <div class="icon mb-3"><span class="flaticon-book"></span></div>
-              <div class="media-body">
-                <h3 class="heading">Knowledge is power</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="media block-6 d-block">
-              <div class="icon mb-3"><span class="flaticon-student"></span></div>
-              <div class="media-body">
-                <h3 class="heading">Senior High School</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-                </p>
-              </div>
-            </div>
-          </div>
+
 
           <div class="col-md-6 col-lg-3">
             <div class="media block-6 d-block">
-              <div class="icon mb-3"><span class="flaticon-diploma"></span></div>
-              <div class="media-body">
-                <h3 class="heading">College of Arts &amp; Sciences</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-                </p>
+  
+              <div class="block-18 d-flex align-items-center">
+                <div class="icon mr-4">
+                  <span class="flaticon-student"></span>
+                </div>
+                <div class="text">
+                  <strong class="number" data-number="<%= totalStudents %>">0</strong>
+                  <span>Students</span>
+                </div>
               </div>
+  
             </div>
           </div>
           <div class="col-md-6 col-lg-3">
             <div class="media block-6 d-block">
-              <div class="icon mb-3">
-                <span class="flaticon-professor"></span>
+  
+  
+              <div class="block-18 d-flex align-items-center">
+                <div class="icon mr-4">
+                  <span class="flaticon-professor"></span>
+                </div>
+                <div class="text">
+                  <strong class="number" data-number="<%= totalTeachers %>">0</strong>
+                  <span>Teachers</span>
+                </div>
               </div>
-              <div class="media-body">
-                <h3 class="heading">Unmatched Proffessor</h3>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-                </p>
+  
+            </div>
+          </div>
+  
+          <div class="col-md-6 col-lg-3">
+            <div class="media block-6 d-block">
+  
+  
+              <div class="block-18 d-flex align-items-center">
+                  <div class="icon mr-4">
+                    <span class="flaticon-diploma"></span>
+                  </div>
+                  <div class="text">
+                    <strong class="number" data-number="<%= totalCourses %>">0</strong>
+                    <span>Courses</span>
+                  </div>
+                </div>
+  
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="media block-6 d-block">
+  
+              <div class="block-18 d-flex align-items-center">
+                <div class="icon mr-4">
+                  <span class="flaticon-books"></span>
+                </div>
+                <div class="text">
+                  <strong class="number" data-number="<%= totalCategories %>">0</strong>
+                  <span>Categories</span>
+                </div>
               </div>
+              
             </div>
           </div>
         </div>
@@ -123,7 +131,7 @@
     <div class="container site-section element-animate">
       <div class="row justify-content-center mb-5 element-animate">
         <div class="col-md-7 text-center section-heading">
-          <h2 class="text-primary heading">Why Choose Us</h2>
+          <h2 class="text-primary heading">Why Online Course</h2>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit qui
             neque sint eveniet tempore sapiente.
@@ -133,7 +141,7 @@
       <div class="block-3 d-md-flex pt-5">
         <div class="image" style="background-image: url('images/img_1.jpg')"></div>
         <div class="text">
-          <h4 class="subheading">Nice text here</h4>
+          <h4 class="subheading">FOR STUDENTS</h4>
           <h2 class="heading">Excellent Teachers</h2>
           <p>
             Even the all-powerful Pointing has no control about the blind texts it
@@ -146,7 +154,7 @@
       <div class="block-3 d-md-flex">
         <div class="image order-2" style="background-image: url('images/img_2.jpg')"></div>
         <div class="text order-1">
-          <h4 class="subheading">Nice text here</h4>
+          <h4 class="subheading">FOR TEACHERS</h4>
           <h2 class="heading">Outstanding Facilities</h2>
           <p>
             Even the all-powerful Pointing has no control about the blind texts it
@@ -159,7 +167,7 @@
       <div class="block-3 d-md-flex">
         <div class="image" style="background-image: url('images/img_3.jpg')"></div>
         <div class="text">
-          <h4 class="subheading">Nice text here</h4>
+          <h4 class="subheading">FOR OIKEN</h4>
           <h2 class="heading">World Class Education</h2>
           <p>
             Even the all-powerful Pointing has no control about the blind texts it
@@ -176,10 +184,6 @@
         <div class="row justify-content-center mb-5">
           <div class="col-md-7 text-center section-heading">
             <h2 class="text-primary heading">Frequently Ask Questions</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-              qui neque sint eveniet tempore sapiente.
-            </p>
           </div>
         </div>
         <div class="row">

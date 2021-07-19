@@ -21,10 +21,6 @@ const CourseSchema = new Schema({
     ref: "User",
   },
   details: {
-    duration: {
-      period: String,
-      quantity: Number,
-    },
     subj: String,
     lectures: { type: Number, default: 0, min: 0 },
     quizzes: { type: Number, default: 0, min: 0 },
@@ -35,18 +31,44 @@ const CourseSchema = new Schema({
     type: String,
     unique: true,
   },
+  slugged: {
+    type: Boolean,
+    default: false,
+  },
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
   },
-});
+  content: {
+    type: String
+  },
+  publish: {
+    type: Boolean,
+    default: false
+  },
+  moduleCount: {
+    type: Number,
+    default: 1
+  },
+  module: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Module",
+    },
+  ],
+  image: String,
+})
 
 CourseSchema.pre("validate", function (next) {
-  const uniqSlug = this.name + '-' + crypto.randomBytes(2).toString("hex");
-  this.slug = slugify(uniqSlug, {
-    lower: true,
-    strict: true
-  });
+  const course = this;
+  if (course.slugged === false) {
+    const uniqSlug = this.name + '-' + crypto.randomBytes(2).toString("hex");
+    this.slug = slugify(uniqSlug, {
+      lower: true,
+      strict: true
+    });
+    course.slugged = true;
+  }
   next();
 });
 

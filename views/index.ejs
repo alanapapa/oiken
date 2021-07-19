@@ -13,6 +13,12 @@
         <div class="col-md-10">
           <div class="mb-5 element-animate">
             <div class="block-17">
+
+            <% if (flashMessages) { %> <% if (flashMessages.success) { %>
+              <div class="alert alert-success text-center"><%= flashMessages.success %></div>
+              <% } else if (flashMessages.error) {%>
+              <div class="alert alert-danger text-center"><%= flashMessages.error %></div>
+              <% } %> <% } %>
               <h2 class="heading text-center mb-4">
                 Find Online Courses That Suits You
               </h2>
@@ -26,18 +32,6 @@
                       placeholder="Search..."
                     />
                   </div>
-                  <!-- <div class="select-wrap one-third">
-                    <div class="icon">
-                      <span class="ion-ios-arrow-down"></span>
-                    </div>
-                    <select name="" id="" class="form-control">
-                      <option value="">Category Course</option>
-                      <option value="">Laravel</option>
-                      <option value="">PHP</option>
-                      <option value="">JavaScript</option>
-                      <option value="">Python</option>
-                    </select>
-                  </div> -->
                 </div>
                 <input
                   type="submit"
@@ -46,7 +40,7 @@
                 />
               </form>
               <p class="text-center mb-5">
-                We have more than 500 courses to improve your skills
+                We have cool courses to improve your skills
               </p>
               <% if (!userIN) { %>
               <p class="text-center">
@@ -66,33 +60,21 @@
       <div class="row align-items-center">
         <div class="col-md-6 order-md-2">
           <div class="block-16">
-            <figure>
-              <img
+=              <img
                 src="images/img_1.jpg"
                 alt="Image placeholder"
                 class="img-fluid"
               />
-              <a
-                href="https://vimeo.com/45830194"
-                class="play-button popup-vimeo"
-                ><span class="ion-ios-play"></span
-              ></a>
-
-              <!-- <a href="https://vimeo.com/45830194" class="button popup-vimeo" data-aos="fade-right" data-aos-delay="700"><span class="ion-ios-play"></span></a> -->
-            </figure>
           </div>
         </div>
         <div class="col-md-6 order-md-1">
           <div class="block-15">
             <div class="heading">
-              <h2>Welcome to University</h2>
+              <h2>Welcome to Oiken</h2>
             </div>
             <div class="text mb-5">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A
-                quibusdam nisi eos accusantium eligendi velit deleniti nihil ad
-                deserunt rerum incidunt nulla nemo eius molestiae architecto
-                beatae asperiores doloribus animi.
+                Oiken is translated from the Kazakh language as "Oi" - mind, "ken" - inexhaustible rich source. This is my educational project for learning backend development with nodeJS.
               </p>
             </div>
             <p>
@@ -107,130 +89,72 @@
   </section>
   <!-- END section -->
 
-  <section class="site-section pt-3 element-animate">
+  <section class="site-section pt-3 element-animate" id="section-counter">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-lg-3">
-          <div class="media block-6 d-block">
-            <div class="icon mb-3"><span class="flaticon-book"></span></div>
-            <div class="media-body">
-              <h3 class="heading">Knowledge is power</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="media block-6 d-block">
-            <div class="icon mb-3"><span class="flaticon-student"></span></div>
-            <div class="media-body">
-              <h3 class="heading">Senior High School</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-              </p>
-            </div>
-          </div>
-        </div>
+
 
         <div class="col-md-6 col-lg-3">
           <div class="media block-6 d-block">
-            <div class="icon mb-3"><span class="flaticon-diploma"></span></div>
-            <div class="media-body">
-              <h3 class="heading">College of Arts &amp; Sciences</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-              </p>
+
+            <div class="block-18 d-flex align-items-center">
+              <div class="icon mr-4">
+                <span class="flaticon-student"></span>
+              </div>
+              <div class="text">
+                <strong class="number" data-number="<%= totalStudents %>">0</strong>
+                <span>Students</span>
+              </div>
             </div>
+
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="media block-6 d-block">
-            <div class="icon mb-3">
-              <span class="flaticon-professor"></span>
+
+
+            <div class="block-18 d-flex align-items-center">
+              <div class="icon mr-4">
+                <span class="flaticon-professor"></span>
+              </div>
+              <div class="text">
+                <strong class="number" data-number="<%= totalTeachers %>">0</strong>
+                <span>Teachers</span>
+              </div>
             </div>
-            <div class="media-body">
-              <h3 class="heading">Unmatched Proffessor</h3>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit mess.
-              </p>
-            </div>
+
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-  <!-- END section -->
 
-  <section class="site-section bg-light element-animate" id="section-counter">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <figure>
-            <img
-              src="images/img_2_b.jpg"
-              alt="Image placeholder"
-              class="img-fluid"
-            />
-          </figure>
-        </div>
-        <div class="col-lg-5 ml-auto">
-          <div class="block-15">
-            <div class="heading">
-              <h2>Education is Life</h2>
-            </div>
-            <div class="text mb-5">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. A
-                quibusdam nisi eos accusantium eligendi velit deleniti nihil ad
-                deserunt rerum incidunt.
-              </p>
-            </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="media block-6 d-block">
+
+
+            <div class="block-18 d-flex align-items-center">
+                <div class="icon mr-4">
+                  <span class="flaticon-diploma"></span>
+                </div>
+                <div class="text">
+                  <strong class="number" data-number="<%= totalCourses %>">0</strong>
+                  <span>Courses</span>
+                </div>
+              </div>
+
           </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="media block-6 d-block">
 
-          <div class="row">
-            <div class="col-md-6">
-              <div class="block-18 d-flex align-items-center">
-                <div class="icon mr-4">
-                  <span class="flaticon-student"></span>
-                </div>
-                <div class="text">
-                  <strong class="number" data-number="12921">0</strong>
-                  <span>Students</span>
-                </div>
+            <div class="block-18 d-flex align-items-center">
+              <div class="icon mr-4">
+                <span class="flaticon-books"></span>
               </div>
-
-              <div class="block-18 d-flex align-items-center">
-                <div class="icon mr-4">
-                  <span class="flaticon-university"></span>
-                </div>
-                <div class="text">
-                  <strong class="number" data-number="51">0</strong>
-                  <span>Schools</span>
-                </div>
+              <div class="text">
+                <strong class="number" data-number="<%= totalCategories %>">0</strong>
+                <span>Categories</span>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="block-18 d-flex align-items-center">
-                <div class="icon mr-4">
-                  <span class="flaticon-books"></span>
-                </div>
-                <div class="text">
-                  <strong class="number" data-number="3902">0</strong>
-                  <span>Books</span>
-                </div>
-              </div>
-
-              <div class="block-18 d-flex align-items-center">
-                <div class="icon mr-4">
-                  <span class="flaticon-mortarboard"></span>
-                </div>
-                <div class="text">
-                  <strong class="number" data-number="1921">0</strong>
-                  <span>Graduates</span>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -244,8 +168,7 @@
         <div class="col-md-7 text-center section-heading">
           <h2 class="text-primary heading">Popular Courses</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-            qui neque sint eveniet tempore sapiente.
+            In the courses section, you can find suitable courses by category and search.
           </p>
           <p>
             <a href="/courses" class="btn btn-primary py-2 px-4"
@@ -262,7 +185,7 @@
           <div class="item">
             <div class="block-19">
               <figure>
-                <img src="/images/img_1.jpg" alt="Image" class="img-fluid" />
+                <img src="<%= courses[i].image != null && courses[i].image || '/images/img_1.jpg' %>" alt="Image" class="img-fluid" />
               </figure>
               <div class="text">
                 <h2 class="heading">
@@ -275,10 +198,10 @@
                 </p>
                 <div class="meta d-flex align-items-center">
                   <div class="number">
-                    <span>2,219/6,000</span>
+                    <span>by <%= courses[i].author.username %></span>
                   </div>
                   <div class="price text-right">
-                    <del class="mr-3">$<%= courses[i].details.price %></del><span>Free</span>
+                    <span><%= courses[i].category.name %></span>
                   </div>
                 </div>
               </div>
@@ -288,122 +211,5 @@
       </div>
     </div>
   </div>
-  <!-- END section -->
-
-  <!-- <div class="container site-section element-animate">
-    <div class="row justify-content-center mb-5">
-      <div class="col-md-7 text-center section-heading">
-        <h2 class="text-primary heading">Teachers</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit qui
-          neque sint eveniet tempore sapiente.
-        </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 col-lg-4">
-        <div class="block-2">
-          <div class="flipper">
-            <div
-              class="front"
-              style="background-image: url(../images/person_3.jpg)"
-            >
-              <div class="box">
-                <h2>Job Smith</h2>
-                <p>Laravel Expert</p>
-              </div>
-            </div>
-            <div class="back">
-              <blockquote>
-                <p>
-                  &ldquo;Even the all-powerful Pointing has no control about the
-                  blind texts it is an almost unorthographic life One day
-                  however a small line of blind text by the name of Lorem Ipsum
-                  decided to leave for the far World of Grammar.&rdquo;
-                </p>
-              </blockquote>
-              <div class="author d-flex">
-                <div class="image mr-3 align-self-center">
-                  <img src="images/person_3.jpg" alt="" />
-                </div>
-                <div class="name align-self-center">
-                  Job Smith <span class="position">Laravel Expert</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="block-2">
-          <div class="flipper">
-            <div
-              class="front"
-              style="background-image: url(../images/person_1.jpg)"
-            >
-              <div class="box">
-                <h2>Mellissa Cruz</h2>
-                <p>JavaScript Guru</p>
-              </div>
-            </div>
-            <div class="back">
-              <blockquote>
-                <p>
-                  &ldquo;Even the all-powerful Pointing has no control about the
-                  blind texts it is an almost unorthographic life One day
-                  however a small line of blind text by the name of Lorem Ipsum
-                  decided to leave for the far World of Grammar.&rdquo;
-                </p>
-              </blockquote>
-              <div class="author d-flex">
-                <div class="image mr-3 align-self-center">
-                  <img src="images/person_1.jpg" alt="" />
-                </div>
-                <div class="name align-self-center">
-                  Mellissa Cruz <span class="position">JavaScript Guru</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4">
-        <div class="block-2">
-          <div class="flipper">
-            <div
-              class="front"
-              style="background-image: url(../images/person_2.jpg)"
-            >
-              <div class="box">
-                <h2>Aldin Powell</h2>
-                <p>WordPress Ninja</p>
-              </div>
-            </div>
-            <div class="back">
-              <blockquote>
-                <p>
-                  &ldquo;Even the all-powerful Pointing has no control about the
-                  blind texts it is an almost unorthographic life One day
-                  however a small line of blind text by the name of Lorem Ipsum
-                  decided to leave for the far World of Grammar.&rdquo;
-                </p>
-              </blockquote>
-              <div class="author d-flex">
-                <div class="image mr-3 align-self-center">
-                  <img src="images/person_2.jpg" alt="" />
-                </div>
-                <div class="name align-self-center">
-                  Aldin Powell <span class="position">WordPress Ninja</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- END .block-2 -->
 
   <%- include('partials/_subscribe') -%> <%- include('partials/_footer') -%>

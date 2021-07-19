@@ -10,5 +10,11 @@ router.route('/').get(courseController.getAllCourses);
 router.route('/course/:slug').get(courseController.getCourse);
 router.route('/enroll').post(courseController.enrollCourse);
 router.route('/leave').post(courseController.leaveCourse);
+router.route('/:slug').delete(courseController.deleteCourse);
+router.route('/course/:slug').put(courseController.updateCourse);
+router.route('/create/:slug').post(courseController.createModule);
+router.route('/delete/:_id').delete(courseController.deleteModule);
+router.route('/update/:_id').put(courseController.updateModule);
+
 
 module.exports = router;

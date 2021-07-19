@@ -35,7 +35,7 @@
             />
           </form>
           <p class="text-center mb-5">
-            We have more than 500 courses to improve your skills
+            We have cool courses to improve your skills
           </p>
         </div>
       </div>
@@ -53,12 +53,13 @@
       <div class="col-md-6 col-lg-8 order-md-2">
         <div class="row">
           <% for (let i=0; i < courses.length; i++) { %>
+            <% if (courses[i].publish == true) { %>
 
           <div class="col-md-12 col-lg-6 mb-5">
             <div class="block-19">
               <figure>
                 <a href="/courses/course/<%= courses[i].slug %>"
-                  ><img src="/images/img_1.jpg" alt="Image" class="img-fluid"
+                  ><img src="<%= courses[i].image != null && courses[i].image || '/images/img_1.jpg' %>" alt="Image" class="img-fluid"
                 /></a>
               </figure>
               <div class="text">
@@ -72,20 +73,16 @@
                 </p>
                 <div class="meta d-flex align-items-center">
                   <div class="number">
-                    <span><%= courses[i].author.username.substring(0, 50) %></span>
+                    <span>by <%= courses[i].author.username.substring(0, 50) %></span>
                   </div>
                   <div class="price text-right">
-                    <!-- <del class="mr-3">$<%= courses[i].details.price %></del> -->
-                    <% if (courses[i].details.price == 0) { %>
-                    <span>Free</span>
-                    <% } else { %>
-                      <span><%= courses[i].details.price %></span>
-                      <% } %>
+                      <span><%= courses[i].category.name %></span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+            <% } %>
           <% } %>
         </div>
 
@@ -114,7 +111,7 @@
                         <% } %>
                     <% } %>
                     <% if (current == pages) { %>
-                        <li class="disabled"><a>Last</a></li>
+                        <li class="disabled" style="visibility: hidden;"><a>Last</a></li>
                     <% } else { %>
                         <li><a href="?page=<%= i-1 %>">Last</a></li>
                     <% } %>

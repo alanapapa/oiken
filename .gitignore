@@ -5,8 +5,6 @@
 ### templates
 temp/
 
-public/
-
 ### Node ###
 # Logs
 logs

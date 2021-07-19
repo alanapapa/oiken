@@ -30,17 +30,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-lg-8 order-md-2 mb-5">
-        <!-- <div class="row">
-              <div class="col-md-12">
-                <img src="/images/img_2.jpg" alt="" class="img-fluid" />
-              </div>
-            </div> -->
 
         <section class="episodes">
           <div class="container">
             <div class="row mb-5">
               <div class="col-md-12 pt-3">
-                <h2>Description</h2>
+                <h2><%= course.name %></h2>
                 <p><%= course.description %></p>
               </div>
             </div>
@@ -71,146 +66,109 @@
               </form>
               <% } %>
             </div>
-            <% if(user && (user.courses.includes(course._id))) { %>
-            <div class="row">
+
+            
+
+
+            
+            <% if (user) { %>
+
+            
+
+            <% if( user && (user.courses.includes(course._id)) || course.author._id == user._id ) { %>
+            <!-- <div class="row">
               <div class="col-md-12 mb-2">
                 <h2 id="lesson">Lesson</h2>
               </div>
-            </div>
-            <div class="row bg-light align-items-center p-4 episode">
-              <div class="col-md-10">
-                <p class="meta">Episode 1 <a href="#">Runtime 2:53</a></p>
-                <h2><a href="#">Some Title Here For The Video</a></h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Architecto, fugit!
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <a href="#" class="play"
-                  ><span class="ion-social-youtube"></span
-                ></a>
-              </div>
-            </div>
+            </div> -->
 
-            <div class="row align-items-center p-4 episode">
-              <div class="col-md-10">
-                <p class="meta">Episode 2 <a href="#">Runtime 5:12</a></p>
-                <h2><a href="#">Some Title Here For The Video</a></h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Architecto, fugit!
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <a href="#" class="play"><span class="ion-ios-book"></span></a>
-              </div>
-            </div>
 
-            <div class="row bg-light align-items-center p-4 episode">
-              <div class="col-md-10">
-                <p class="meta">Episode 3 <a href="#">Runtime 5:12</a></p>
-                <h2><a href="#">Some Title Here For The Video</a></h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Architecto, fugit!
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <a href="#" class="play"><span class="ion-ios-help"></span></a>
-              </div>
+              <!-- COURSE MODULES -->
+      
+      
+              <div class="col-md-12 mb-2" style="padding-top: 80px;">
+              <% for (let i = 0; i < course.module.length; i++) { %>
+              <section class="episodes modal" id="updateCourse<%= coursee.module[i]._id %>" tabindex="-1">
+                <%- course.module[i].cont %>
+              </section>
+              <% } %>
             </div>
+                      
+              <% } %>
+              <% } else { %>
+                <h1>In order to take the course you need to <a href="/login">log in</a></h1>
+                <% } %>
 
-            <div class="row align-items-center p-4 episode">
-              <div class="col-md-10">
-                <p class="meta">Episode 4 <a href="#">Runtime 6:55</a></p>
-                <h2><a href="#">Some Title Here For The Video</a></h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Architecto, fugit!
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <a href="#" class="play"><span class="ion-ios-paper"></span></a>
-              </div>
-            </div>
-
-            <div class="row bg-light align-items-center p-4 episode">
-              <div class="col-md-10">
-                <p class="meta">Episode 5 <a href="#">Runtime 14:33</a></p>
-                <h2><a href="#">Some Title Here For The Video</a></h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Architecto, fugit!
-                </p>
-              </div>
-              <div class="col-md-2 text-center">
-                <a href="#" class="play"><span class="ion-ios-play"></span></a>
-              </div>
-            </div>
-            <% } %>
+                <% if( user && (!user.courses.includes(course._id)) || course.author._id == user._id ) { %>
+                  <div class="col-md-12 mb-2" style="padding-top: 80px;">
+                  <h1>In order to view the content of the course you need to enroll</h1>
+                  </div>
+                  <% } %>
+              
           </div>
         </section>
       </div>
       <!-- END content -->
+
       <div class="col-md-6 col-lg-4 order-md-1">
-        <div class="block-29 mb-5">
-          <h2 class="heading">Course Details</h2>
-          <ul>
-            <li>
-              <span class="text-1">Duration:</span>
-              <span class="text-2">
-                <%= course.details.duration.quantity %> <%=
-                course.details.duration.period %>
-              </span>
-            </li>
-            <li>
-              <span class="text-1">Lectures:</span>
-              <span class="text-2"> <%= course.details.lectures %> </span>
-            </li>
-            <li>
-              <span class="text-1">Quizzes:</span>
-              <span class="text-2"> <%= course.details.quizzes %> </span>
-            </li>
-            <li>
-              <span class="text-1">Certificate:</span>
-              <span class="text-2">
-                <%= course.details.certificate === true && 'Yes' || 'No' %>
-              </span>
-            </li>
-            <li>
-              <span class="text-1">Subject:</span>
-              <span class="text-2"> <%= course.details.subj %> </span>
-            </li>
-            <li>
-              <span class="text-1">Language:</span>
-              <span class="text-2">English</span>
-            </li>
-            <li>
-              <span class="text-1">Price:</span>
-              <span class="text-2">$<%= course.details.price %></span>
-            </li>
-          </ul>
-        </div>
+
+
 
         <div class="block-28 text-center mb-5">
           <figure>
-            <img src="/images/person_3.jpg" alt="" class="img-fluid" />
+            <img src="<%= course.image != null && course.image || '/images/img_1.jpg' %>" alt="" class="img-fluid" />
           </figure>
           <h2 class="heading"><%= course.author.username %></h2>
           <h3 class="subheading">Course Author</h3>
-          <p>
-            <a href="#" class="fa fa-twitter p-2"></a>
-            <a href="#" class="fa fa-facebook p-2"></a>
-            <a href="#" class="fa fa-linkedin p-2"></a>
-          </p>
-          <p>
-            Hi I'm Mark Stewart, consectetur adipisicing elit. Quibusdam nulla
-            beatae modi itaque nemo magni molestiae explicabo sint dolorum cum!
-            Nam iste eligendi autem voluptates illo veritatis veniam laudantium
-            enim!
-          </p>
+          <div class="tab-pane active" id="Login">
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <%= course.name %>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  
+                  <%= course.description %>"
+                </div>
+              </div>
+           
+          </div>
         </div>
+
+
+
+
+
+        <div class="block-29 mb-5 episodes">
+          <h3>Course Modules</h3>
+          <% for (let i = 0; i < coursee.module.length; i++ ) { %>
+
+          <div class="row align-items-center p-4 episode">
+            <div class="col-md-10">
+              <h5>
+
+                <button type="menu" class="btn btn-primary rounded-0 text-white col-12"
+												data-toggle="modal" onclick="" data-target="#updateCourse<%= coursee.module[i]._id %>"
+												><span><%= coursee.module[i].title %></span></button>
+              </h5>
+            </div>
+            <div class="col-md-2 text-center">
+              <a class="play"><span class="ion-ios-paper"></span
+              ></a>
+            </div>
+          </div>
+
+          <% } %>
+        </div>
+
+        
+      </div>
+
+
+      
+      
+
+       
       </div>
       <!-- END Sidebar -->
     </div>
