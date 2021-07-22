@@ -36,6 +36,38 @@ exports.createCourse = async (req, res) => {
   }
 };
 
+exports.create1Course = async (req, res) => {
+  try {
+    const uploadsDir = 'public/uploads';
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir);
+    }
+    console.log(req.body)
+    if (req.files) {
+      let uploadImage = req.files.image;
+      let uploadPath = __dirname + '/../public/uploads/' + uploadImage.name;
+      uploadImage.mv(uploadPath, async () => {
+        const course = await Course.create({
+          ...req.body,
+          image: '/uploads/' + uploadImage.name,
+        });
+        const path = "/users/create1/" + course.slug;
+        req.flash('success', "Course has been created successfully!");
+        res.status(201).redirect(path);
+      });
+    } else {
+      const course = await Course.create(req.body);
+      const path = "/users/create1/" + course.slug;
+      req.flash('success', "Course has been created successfully!");
+      res.status(201).redirect(path);
+    }
+  } catch (error) {
+    console.log(error)
+    req.flash('error', "Something went wrong!");
+    res.status(400).redirect('back');
+  }
+};
+
 exports.getAllCourses = async (req, res) => {
   try {
     const page = req.query.page || 1;

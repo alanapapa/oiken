@@ -1,5 +1,4 @@
 <%- include('partials/_head') -%> <%- include('partials/_nav') -%>
-
 <section
   class="site-hero site-sm-hero overlay"
   style="background-image: url(/images/big_image_2.jpg); min-height: 350px"
@@ -24,155 +23,153 @@
     </div>
   </div>
 </section>
-<!-- END section -->
 
 <div class="site-section bg-light element-animate">
-  <div class="container">
+  <div class="container" style="max-width: 100%">
     <div class="row">
-      <div class="col-md-6 col-lg-8 order-md-2 mb-5">
-
-        <section class="episodes">
-          <div class="container">
-            <div class="row mb-5">
-              <div class="col-md-12 pt-3">
-                <h2><%= course.name %></h2>
-                <p><%= course.description %></p>
-              </div>
+      <div class="col-md-6 col-lg-4 order-md-1">
+        <div class="block-29 mb-5 episodes tab">
+          <div class="row align-items-center p-4 episode">
+            <div class="col-md-12">
+              <h5>
+                <button
+                  class="tablinks btn btn-primary rounded-0 text-white col-12"
+                  onclick="openTab(event, 'info')"
+                  id="defaultOpen"
+                >
+                  Course Details
+                </button>
+              </h5>
             </div>
           </div>
-          <div class="container">
-            <div class="col-lg-12 text-right">
-              <% if (user && !(user.courses.includes(course._id))) { %>
-              <form action="/courses/enroll" method="POST">
-                <input
-                  type="hidden"
-                  name="course_id"
-                  value="<%= course._id %>"
-                />
-                <button class="btn btn-primary reverse py-2 px-4" name="enroll">
-                  ENROLL
-                </button>
-              </form>
-              <% } else if(user && (user.courses.includes(course._id))) { %>
-              <form action="/courses/leave" method="POST">
-                <input
-                  type="hidden"
-                  name="course_id"
-                  value="<%= course._id %>"
-                />
-                <button class="btn btn-primary btn-danger reverse py-2 px-4">
-                  LEAVE COURSE
-                </button>
-              </form>
-              <% } %>
-            </div>
-
-            
-
-
-            
-            <% if (user) { %>
+          <% if (user) { %>
 
             
 
             <% if( user && (user.courses.includes(course._id)) || course.author._id == user._id ) { %>
-            <!-- <div class="row">
-              <div class="col-md-12 mb-2">
-                <h2 id="lesson">Lesson</h2>
-              </div>
-            </div> -->
-
-
-              <!-- COURSE MODULES -->
-      
-      
-              <div class="col-md-12 mb-2" style="padding-top: 80px;">
-              <% for (let i = 0; i < course.module.length; i++) { %>
-              <section class="episodes modal" id="updateCourse<%= coursee.module[i]._id %>" tabindex="-1">
-                <%- course.module[i].cont %>
-              </section>
-              <% } %>
-            </div>
-                      
-              <% } %>
-              <% } else { %>
-                <h1>In order to take the course you need to <a href="/login">log in</a></h1>
-                <% } %>
-
-                <% if( user && (!user.courses.includes(course._id)) || course.author._id == user._id ) { %>
-                  <div class="col-md-12 mb-2" style="padding-top: 80px;">
-                  <h1>In order to view the content of the course you need to enroll</h1>
-                  </div>
-                  <% } %>
-              
-          </div>
-        </section>
-      </div>
-      <!-- END content -->
-
-      <div class="col-md-6 col-lg-4 order-md-1">
-
-
-
-        <div class="block-28 text-center mb-5">
-          <figure>
-            <img src="<%= course.image != null && course.image || '/images/img_1.jpg' %>" alt="" class="img-fluid" />
-          </figure>
-          <h2 class="heading"><%= course.author.username %></h2>
-          <h3 class="subheading">Course Author</h3>
-          <div class="tab-pane active" id="Login">
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <%= course.name %>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-12">
-                  
-                  <%= course.description %>"
-                </div>
-              </div>
-           
-          </div>
-        </div>
-
-
-
-
-
-        <div class="block-29 mb-5 episodes">
-          <h3>Course Modules</h3>
-          <% for (let i = 0; i < coursee.module.length; i++ ) { %>
+          <% for (let i = 0; i < coursee.module.length; i++) { %>
 
           <div class="row align-items-center p-4 episode">
-            <div class="col-md-10">
+            <div class="col-md-12">
               <h5>
-
-                <button type="menu" class="btn btn-primary rounded-0 text-white col-12"
-												data-toggle="modal" onclick="" data-target="#updateCourse<%= coursee.module[i]._id %>"
-												><span><%= coursee.module[i].title %></span></button>
+                <button
+                  class="tablinks btn btn-primary rounded-0 text-white col-12"
+                  onclick="openTab(event, <%= i %>)"
+                  style="white-space: normal"
+                >
+                  <%= coursee.module[i].title %>
+                </button>
               </h5>
             </div>
-            <div class="col-md-2 text-center">
-              <a class="play"><span class="ion-ios-paper"></span
+            <!-- <div class="col-md-2 text-center">
+              <a
+                href="#"
+                class="play"
+                style="background-color: red"
+                ><span class="ion-android-cancel"></span
               ></a>
+            </div> -->
+          </div>
+          <% } %>
+          <% } %>
+          <% } %>
+
+          <!-- add module -->
+
+          <div class="row align-items-center p-4 episode">
+            <div class="col-md-2 text-center">
+                <% if (user && !(user.courses.includes(course._id))) { %>
+                    <form action="/courses/enroll" method="POST">
+                      <input
+                        type="hidden"
+                        name="course_id"
+                        value="<%= course._id %>"
+                      />
+                      <button class="btn btn-primary reverse py-2 px-4" name="enroll">
+                        ENROLL
+                      </button>
+                    </form>
+                    <% } else if(user && (user.courses.includes(course._id))) { %>
+                    <form action="/courses/leave" method="POST">
+                      <input
+                        type="hidden"
+                        name="course_id"
+                        value="<%= course._id %>"
+                      />
+                      <button class="btn btn-primary btn-danger reverse py-2 px-4">
+                        LEAVE COURSE
+                      </button>
+                    </form>
+                    <% } %>
+            </div>
+
+            <!-- END add module -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-8 order-md-2 mb-5">
+        <div id="info" class="tabcontent">
+          <!-- course details -->
+
+          <div class="block-28 text-center mb-5">
+            <figure>
+              <img
+                src="<%= course.image != null && course.image || '/images/img_1.jpg' %>"
+                alt=""
+                class="img-fluid"
+              />
+            </figure>
+
+            <h2 class="heading"><%= coursee.author.username %></h2>
+            <h3 class="subheading">Course Author</h3>
+            <div class="tab-pane active" id="Login">
+                <!---->
+                <h2><%= coursee.name %></h2>
+                <p><%= coursee.description %></p>
+
+                <% if(!user) { %>
+                  <h3>In order to take the course you need to <a href="/login">log in</a></h3>
+                <% } %>
+
+
+
+
+
+                <!---->
             </div>
           </div>
 
-          <% } %>
+          <!-- END course details -->
         </div>
-
-        
+        <% for (let i = 0; i < coursee.module.length; i++) { %>
+        <div id="<%= i %>" class="tabcontent">
+          <h3><%= coursee.module[i].title %></h3>
+          <%- coursee.module[i].cont %>
+        </div>
+        <% } %>
       </div>
-
-
-      
-      
-
-       
-      </div>
-      <!-- END Sidebar -->
     </div>
   </div>
-</div>
 
-<%- include('partials/_subscribe') -%> <%- include('partials/_footer') -%>
+  <script>
+    function openTab(evt, tabID) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabID).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+  </script>
+    <%- include('partials/_subscribe') -%>
+  <%- include('partials/_footer') -%>
+</div>

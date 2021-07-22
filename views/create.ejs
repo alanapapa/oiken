@@ -49,88 +49,53 @@
     </div>
   </div>
 </section>
-<!-- END section -->
 
 <div class="site-section bg-light element-animate">
-  <div class="container">
+  <div class="container" style="max-width: 100%">
     <div class="row">
-      
-      <div class="col-md-6 col-lg-8 order-md-2 mb-5">
-        <!-- COURSE MODULES -->
-
-
-        
-        <% for (let i = 0; i < coursee.module.length; i++) { %>
-        <section class="episodes modal" id="updateCourse<%= coursee.module[i]._id %>" tabindex="-1">
-          
-          <form method="POST" action="/courses/update/<%= coursee.module[i]._id %>?_method=PUT">
-            <input
-              type="hidden"
-              name="course_id"
-              value="<%= course._id %>"
-              class="form-control"
-            />
-            <label for="title">Module Title</label>
-            <input type="text" name="title" class="form-control" value="<%= coursee.module[i].title %>" />
-            <br>
-            <label for="cont">Module Content</label>
-            <textarea
-              class="full-featured"
-              name="cont"
-              rows="28"
-              class="form-control"
-            > <%= coursee.module[i].cont %>
-            </textarea>
-            <div class="row" style="padding-top: 20px">
-              <div class="col-lg-12 text-left">
-                <button type="submit" class="btn btn-primary">Save</button>
-              </div>
-            </div>
-          </form>
-          
-          <script>
-            tinymce.init({
-              selector: ".full-featured",
-              plugins:
-                "a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker",
-              toolbar:
-                "a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table",
-              toolbar_mode: "floating",
-              tinycomments_mode: "embedded",
-              tinycomments_author: "Author name",
-            });
-          </script>
-        </section>
-        <% } %>
-      </div>
-
-      <!-- END COURSE MODULES -->
-
-      <!-- COURSE DETAILS -->
       <div class="col-md-6 col-lg-4 order-md-1">
-        <div class="block-29 mb-5 episodes">
-          <% for (let i = 0; i < coursee.module.length; i++ ) { %>
+        <div class="block-29 mb-5 episodes tab">
+          <div class="row align-items-center p-4 episode">
+            <div class="col-md-10">
+              <h5>
+                <button
+                  class="tablinks btn btn-primary rounded-0 text-white col-12"
+                  onclick="openTab(event, 'info')"
+                  id="defaultOpen"
+                >
+                  Course Details
+                </button>
+              </h5>
+            </div>
+          </div>
+          <% for (let i = 0; i < coursee.module.length; i++) { %>
 
           <div class="row align-items-center p-4 episode">
             <div class="col-md-10">
               <h5>
-
-                <button type="menu" class="btn btn-primary rounded-0 text-white col-12"
-												data-toggle="modal" data-target="#updateCourse<%= coursee.module[i]._id %>"
-												><span><%= coursee.module[i].title %></span></button>
+                <button
+                  class="tablinks btn btn-primary rounded-0 text-white col-12"
+                  onclick="openTab(event, <%= i %>)"
+                  style="white-space: normal"
+                >
+                  <%= coursee.module[i].title %>
+                </button>
               </h5>
             </div>
             <div class="col-md-2 text-center">
               <a
                 href="/courses/delete/<%= coursee.module[i]._id %>?_method=DELETE"
                 onclick="return confirm('ARE YOU SURE?')"
-                class="play" style="background-color: red;"
+                class="play"
+                style="background-color: red"
                 ><span class="ion-android-cancel"></span
               ></a>
             </div>
           </div>
-
           <% } %>
+
+          <!-- add module -->
+
           <div class="row align-items-center p-4 episode">
             <div class="col-md-2 text-center">
               <form method="POST" action="/courses/create/<%= course.slug %>">
@@ -149,97 +114,195 @@
                 </div>
               </form>
             </div>
+
+            <!-- END add module -->
           </div>
         </div>
+      </div>
 
-        <div class="block-28 text-center mb-5">
-          <figure>
-            <img src="<%= course.image != null && course.image || '/images/img_1.jpg' %>" alt="" class="img-fluid" />
-          </figure>
+      <div class="col-md-6 col-lg-8 order-md-2 mb-5">
+        <div id="info" class="tabcontent">
+          <!-- course details -->
 
-          
-          <h2 class="heading"><%= coursee.author.username %></h2>
-          <h3 class="subheading">Course Author</h3>
-          <div class="tab-pane active" id="Login">
-            <form
-              role="form"
-              class="form-horizontal"
-              method="POST"
-              action="/courses/course/<%= course.slug %>?_method=PUT"
-              encType="multipart/form-data"
+          <div class="block-28 text-center mb-5">
+            <figure>
+              <img
+                src="<%= course.image != null && course.image || '/images/img_1.jpg' %>"
+                alt=""
+                class="img-fluid"
+              />
+            </figure>
+
+            <h2 class="heading"><%= coursee.author.username %></h2>
+            <h3 class="subheading">Course Author</h3>
+            <div class="tab-pane active" id="Login">
+              <form
+                role="form"
+                class="form-horizontal"
+                method="POST"
+                action="/courses/course/<%= course.slug %>?_method=PUT"
+                encType="multipart/form-data"
+              >
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="image">Update Image</label>
+                    <input
+                      type="file"
+                      name="image"
+                      class="form-control-file"
+                      placeholder="Image"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="name">Course Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      maxlength="30"
+                      class="form-control"
+                      placeholder="Course Name"
+                      value="<%= course.name %>"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <label for="description">Description</label>
+                    <textarea
+                      rows="12"
+                      name="description"
+                      maxlength="200"
+                      class="form-control"
+                      placeholder="Description"
+                      required
+                    >
+<%= course.description %>"</textarea
+                    >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12">
+                    <select name="category" required>
+                      <option
+                        value="<%= course.category %>"
+                        selected
+                        disabled
+                        hidden
+                      >
+                        Choose Course Category
+                      </option>
+                      <% for (let i=0;i < categories.length; i++) { %>
+                      <option value="<%= categories[i]._id %>">
+                        <%= categories[i].name %>
+                      </option>
+                      <% } %>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 text-center">
+                    <button
+                      type="submit"
+                      class="btn btn-primary reverse py-2 px-4"
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- END course details -->
+        </div>
+        <% for (let i = 0; i < coursee.module.length; i++) { %>
+        <div id="<%= i %>" class="tabcontent">
+          <form
+            method="POST"
+            action="/courses/update/<%= coursee.module[i]._id %>?_method=PUT"
+          >
+            <input
+              type="hidden"
+              name="course_id"
+              value="<%= course._id %>"
+              class="form-control"
+            />
+            <label for="title">Module Title</label>
+            <input
+              type="text"
+              name="title"
+              class="form-control"
+              value="<%= coursee.module[i].title %>"
+            />
+            <br />
+            <label for="cont">Module Content</label>
+            <textarea class="full-featured" name="cont" class="form-control">
+ <%= coursee.module[i].cont %>
+                </textarea
             >
-            <div class="form-group">
-              <div class="col-sm-12">
-                <label for="image">Update Image</label>
-                <input type="file" name="image" class="form-control-file" placeholder="Image">
+            <div class="row" style="padding-top: 20px">
+              <div class="col-lg-12 text-left">
+                <button type="submit" class="btn btn-primary">Save</button>
               </div>
             </div>
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <label for="name">Course Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    maxlength="30"
-                    class="form-control"
-                    placeholder="Course Name"
-                    value="<%= course.name %>"
-                    required
-                  />
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <label for="description">Description</label>
-                  <textarea
-                    rows="12"
-                    name="description"
-                    maxlength="200"
-                    class="form-control"
-                    placeholder="Description"
-                    required
-                  ><%= course.description %>"</textarea
-                  >
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-12">
-                  <select name="category" required>
-                    <option
-                      value="<%= course.category %>"
-                      selected
-                      disabled
-                      hidden
-                    >
-                      Choose Course Category
-                    </option>
-                    <% for (let i=0;i < categories.length; i++) { %>
-                    <option value="<%= categories[i]._id %>">
-                      <%= categories[i].name %>
-                    </option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-12 text-center">
-                  <button
-                    type="submit"
-                    class="btn btn-primary reverse py-2 px-4"
-                  >
-                    Update
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
+          </form>
 
-        
+          <script>
+            tinymce.init({
+              selector: ".full-featured",
+              plugins:
+                "print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
+              imagetools_cors_hosts: ["picsum.photos"],
+              menubar: "file edit view insert format tools table help",
+              toolbar:
+                "undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl",
+              toolbar_sticky: true,
+              autosave_ask_before_unload: true,
+              autosave_interval: "30s",
+              autosave_prefix: "{path}{query}-{id}-",
+              autosave_restore_when_empty: false,
+              autosave_retention: "2m",
+              image_advtab: true,
+              height: 600,
+              image_caption: true,
+              quickbars_selection_toolbar:
+                "bold italic | quicklink h2 h3 blockquote quickimage quicktable",
+              toolbar_mode: "sliding",
+              contextmenu: "link image imagetools table",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            });
+          </script>
+
+          <!-- <h3><%= coursee.module[i].title %></h3>
+          <%- coursee.module[i].cont %> -->
+        </div>
+        <% } %>
       </div>
-      <!-- END COURSE DETAILS -->
     </div>
   </div>
-</div>
 
-<%- include('partials/_subscribe') -%> <%- include('partials/_footer') -%>
+  <script>
+    function openTab(evt, tabID) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabID).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+  </script>
+
+  <%- include('partials/_footer') -%>
+</div>

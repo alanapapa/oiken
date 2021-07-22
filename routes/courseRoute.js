@@ -6,6 +6,7 @@ const roleMiddleware = require("../middlewares/roleMiddleware");
 const router = express.Router();
 
 router.route('/').post(roleMiddleware(["teacher", "admin"]), courseController.createCourse);
+router.route('/new').post(roleMiddleware(["teacher", "admin"]), courseController.create1Course);
 router.route('/').get(courseController.getAllCourses);
 router.route('/course/:slug').get(courseController.getCourse);
 router.route('/enroll').post(courseController.enrollCourse);

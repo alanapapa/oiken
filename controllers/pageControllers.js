@@ -80,7 +80,7 @@ exports.sendEmail = async (req, res) => {
         secure: true,
         auth: {
           user: "oiken@alnp.pw",
-          pass: "ikfK{H(]@>",
+          pass: "l>S[O*?!]hM.(5{_",
         },
       });
 
